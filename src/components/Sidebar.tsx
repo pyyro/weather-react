@@ -53,20 +53,24 @@ const Sidebar: FC<Props> = ({ weatherData, setCityToGetData }) => {
   //     setCityToGetData(target.value)
   //   }
 
-    const handleChange = (e:any) =>{
-      if(e.key==='Enter'){
-        setCityToGetData(e.target.value)
-        e.target.value = ""
-      }
+  const handleChange = (e: any) => {
+    if (e.key === "Enter") {
+      setCityToGetData(e.target.value);
+      e.target.value = "";
     }
+  };
 
-    return (
+  return (
     <Box w="20%" h="100vh" background="white">
       <Box w="90%" ml="4">
         <Box mt="4" w="95%">
           <InputGroup>
             <InputLeftElement children={<Icon as={AiOutlineSearch} />} />
-            <Input placeholder="Search Place" bg="gray.200"  onKeyDown={handleChange}/>
+            <Input
+              placeholder="Search Place"
+              bg="gray.200"
+              onKeyDown={handleChange}
+            />
           </InputGroup>
         </Box>
 
@@ -74,7 +78,7 @@ const Sidebar: FC<Props> = ({ weatherData, setCityToGetData }) => {
 
         <Box>
           <Text fontSize="6xl" color="blue.500">
-            {(weatherData?.currentTemp! - 275).toFixed(1)}
+            {(weatherData?.currentTemp! - 275).toFixed(1)} °C
           </Text>
         </Box>
 
@@ -109,10 +113,7 @@ const Sidebar: FC<Props> = ({ weatherData, setCityToGetData }) => {
           </Stack>
         </Box> */}
 
-        <Box
-          height="64"
-          mt={10}
-        >
+        <Box height="64" mt={10}>
           <Icon as={IoLocation} w="8" h="8" />
           <Text as="span" fontSize="4xl">
             {weatherData?.cityName}
