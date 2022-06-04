@@ -77,8 +77,8 @@ const Content: FC<Props> = ({ weatherData }) => {
         </HStack>
       </HStack>
 
-      <Flex alignItems="center"  mt={4}>
-        {weatherData?.daily.slice(0,7).map((_daily) => {
+      <Flex alignItems="center" mt={4}>
+        {weatherData?.daily.slice(0, 7).map((_daily) => {
           return (
             <DailyWeatherCard
               key={_daily.day}

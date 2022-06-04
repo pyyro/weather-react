@@ -2,17 +2,17 @@ import { Box, HStack, Image, Text } from "@chakra-ui/react";
 import { FC } from "react";
 
 interface Props {
-  title: string,
-  value: number,
-  unit: string,
-  statusProperty: string,
-  statusValue: string,
-  statusValueColor: string,
-  ballColor: string,
-  ballPosValue: number
+  title: string;
+  value: number;
+  unit: string;
+  statusProperty: string;
+  statusValue: string;
+  statusValueColor: string;
+  ballColor: string;
+  ballPosValue: number;
 }
 
-const TodayCard:FC<Props> = ({
+const TodayCard: FC<Props> = ({
   title,
   value,
   unit,
