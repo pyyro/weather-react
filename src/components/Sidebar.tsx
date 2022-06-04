@@ -22,6 +22,7 @@ interface DailyWeather {
 interface WeatherData {
   dt: number;
   cityName: string;
+  timezone: string;
   currentTemp: number;
   humidity: number;
   sunrise: number;
@@ -91,6 +92,7 @@ const Sidebar: FC<Props> = ({ weatherData, setCityToGetData }) => {
               hour: "numeric",
               minute: "numeric",
               hour12: true,
+              timeZone: weatherData?.timezone,
             })}
           </Text>
         </Box>

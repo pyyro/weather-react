@@ -24,6 +24,7 @@ interface DailyWeather {
 interface WeatherData {
   dt: number;
   cityName: string;
+  timezone: string,
   currentTemp: number;
   humidity: number;
   sunrise: number;

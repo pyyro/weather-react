@@ -14,6 +14,7 @@ interface DailyWeather {
 interface WeatherData {
   dt: number;
   cityName: string;
+  timezone: string;
   currentTemp: number;
   humidity: number;
   sunrise: number;
@@ -56,6 +57,7 @@ const App: FC = () => {
     }));
     let _weatherDataObj: WeatherData = {
       dt: data.current.dt,
+      timezone: data.timezone,
       cityName: dataForCity[0].name,
       currentTemp: data.current.temp,
       humidity: data.current.humidity,
