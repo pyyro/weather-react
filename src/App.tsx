@@ -30,7 +30,6 @@ type Coordinates = {
 
 const App: FC = () => {
   const [cityToGetData,setCityToGetData] = useState<string>("Kathmandu");
-  const [coordinatesOfCity, setCoordinatesOfCity] = useState<Coordinates>({lat: '27.708317', lon: '85.3205817'})
   const [weatherData, setWeatherData] = useState<WeatherData | null>(null);
 
   const getData= async():Promise<void> => {
@@ -45,15 +44,12 @@ const App: FC = () => {
       lon: dataForCity[0].lon
     }
     
-    setCoordinatesOfCity(_cityLatLon)
-
-    const urlForWeatherData = `https://api.openweathermap.org/data/2.5/onecall?exclude=alerts,minutely&lat=${coordinatesOfCity.lat}&lon=${coordinatesOfCity.lon}&appid=${process.env.REACT_APP_API_KEY}`
+    const urlForWeatherData = `https://api.openweathermap.org/data/2.5/onecall?exclude=alerts,minutely&lat=${_cityLatLon.lat}&lon=${_cityLatLon.lon}&appid=${process.env.REACT_APP_API_KEY}`
     
     const responseForWeatherData = await axios.get(urlForWeatherData);
     const data = await responseForWeatherData.data;
 
-
-    let _dailyData = data.daily.map((_data:any)=>(
+    let _dailyData = await data.daily.map((_data:any)=>(
       {day: new Date(_data.dt * 1000).getDay(), temp: _data.temp.day, weatherType: _data.weather[0].main}
     ))    
     let _weatherDataObj: WeatherData = {
@@ -69,8 +65,6 @@ const App: FC = () => {
     }
     setWeatherData(_weatherDataObj);
   }
-
-  console.log(cityToGetData)
 
   useEffect(()=>{
     getData();
