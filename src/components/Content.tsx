@@ -177,8 +177,8 @@ const Content: FC<Props> = ({ weatherData }) => {
 
         <TodayCard
           title="Visibility"
-          value={weatherData?.visibility!}
-          unit=""
+          value={weatherData?.visibility!/1000}
+          unit="km"
           statusProperty="Status: "
           statusValue="Average"
           statusValueColor="yellow.500"
