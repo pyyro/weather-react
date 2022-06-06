@@ -48,11 +48,9 @@ const Sidebar: FC<Props> = ({ weatherData, setCityToGetData }) => {
     const url = `https://api.openweathermap.org/geo/1.0/direct?q=${cityQuery}&limit=3&appid=${process.env.REACT_APP_API_KEY}`;
     let response = await axios.get(url);
     let result = await response.data;
-    console.log(result);
     let _cityList: string[] = [];
     result.forEach((item: any) => {
       _cityList.push(item.name);
-      console.log(item.name);
     });
     setCityList(_cityList);
   };
