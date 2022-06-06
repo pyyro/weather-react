@@ -12,7 +12,7 @@ import {
   ListItem,
 } from "@chakra-ui/react";
 import axios from "axios";
-import React, { FC, useEffect, useRef, useState } from "react";
+import React, { FC, useRef, useState } from "react";
 import { AiOutlineSearch } from "react-icons/ai";
 import { IoLocation } from "react-icons/io5";
 
@@ -138,21 +138,6 @@ const Sidebar: FC<Props> = ({ weatherData, setCityToGetData }) => {
 
         <Divider />
 
-        {/* <Box mt="6" mb="6">
-          <Stack direction={["column", "row"]} spacing="24px">
-            <Image src="../../assets/cloudy.svg" boxSize="50px" />
-            <Text fontSize="2xl" color="gray.400">
-              Mostly Cloudy
-            </Text>
-          </Stack>
-
-          <Stack direction={["column", "row"]} spacing="24px">
-            <Image src="../../assets/rainny.svg" boxSize="50px" />
-            <Text fontSize="2xl" color="gray.400">
-              Rain - 30%
-            </Text>
-          </Stack>
-        </Box> */}
 
         <Box height="64" mt={10}>
           <Icon as={IoLocation} w="8" h="8" />

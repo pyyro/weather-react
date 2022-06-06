@@ -4,13 +4,11 @@ import {
   Box,
   Text,
   HStack,
-  Avatar,
   Flex,
   Spacer,
   Grid,
 } from "@chakra-ui/react";
 import { FC } from "react";
-import { AiOutlineDown } from "react-icons/ai";
 import { GoLocation } from "react-icons/go";
 import DailyWeatherCard from "./DailyWeatherCard";
 import TodayCard from "./TodayCard";
