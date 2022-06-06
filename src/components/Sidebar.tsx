@@ -66,7 +66,7 @@ const Sidebar: FC<Props> = ({ weatherData, setCityToGetData }) => {
   ];
 
 
-  const handleSearch = (e:React.KeyboardEvent<HTMLInputElement>) => {
+  const handleSearch = (e:React.ChangeEvent<HTMLInputElement>) => {
       let target = e.target as HTMLInputElement;
       if(!target.value){
         setCityList([]);
@@ -89,7 +89,7 @@ const Sidebar: FC<Props> = ({ weatherData, setCityToGetData }) => {
             <Input
               placeholder="Search Place"
               bg="gray.200"
-              onKeyDown={handleSearch}
+              onChange={handleSearch}
               ref={searchInputRef}
             />
           </InputGroup>
