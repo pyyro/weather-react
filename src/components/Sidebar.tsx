@@ -1,4 +1,5 @@
 import {
+  List,
   Input,
   InputGroup,
   Icon,
@@ -7,9 +8,11 @@ import {
   Box,
   Text,
   Divider,
-  Stack,
+  VStack,
+  ListItem,
 } from "@chakra-ui/react";
-import React, { FC } from "react";
+import axios from "axios";
+import React, { FC, useEffect, useRef, useState } from "react";
 import { AiOutlineSearch } from "react-icons/ai";
 import { IoLocation } from "react-icons/io5";
 
@@ -38,6 +41,22 @@ type Props = {
 };
 
 const Sidebar: FC<Props> = ({ weatherData, setCityToGetData }) => {
+  const [cityList, setCityList] = useState<string[]>([]);
+  const searchInputRef:any = useRef();
+
+  const getCitiesFromSearch = async (cityQuery: string) => {
+    const url = `https://api.openweathermap.org/geo/1.0/direct?q=${cityQuery}&limit=3&appid=${process.env.REACT_APP_API_KEY}`;
+    let response = await axios.get(url);
+    let result = await response.data;
+    console.log(result);
+    let _cityList: string[] = [];
+    result.forEach((item: any) => {
+      _cityList.push(item.name);
+      console.log(item.name);
+    });
+    setCityList(_cityList);
+  };
+
   var weekDay: string[] = [
     "Sunday",
     "Monday",
@@ -48,32 +67,52 @@ const Sidebar: FC<Props> = ({ weatherData, setCityToGetData }) => {
     "Saturday",
   ];
 
-  // const handleChange = (e:React.KeyboardEvent) => {
-  //   if(e.key==='Enter'){
-  //     let target = e.target as HTMLInputElement
-  //     setCityToGetData(target.value)
-  //   }
 
-  const handleChange = (e: any) => {
-    if (e.key === "Enter") {
-      setCityToGetData(e.target.value);
-      e.target.value = "";
-    }
-  };
+  const handleSearch = (e:React.KeyboardEvent<HTMLInputElement>) => {
+      let target = e.target as HTMLInputElement;
+      if(!target.value){
+        setCityList([]);
+      }
+      getCitiesFromSearch(target.value);
+  }
+
+  const handleListClick = (cityListItem:string):any => {
+    searchInputRef.current.value="";
+    setCityToGetData(cityListItem); 
+    setCityList([]);
+  }
 
   return (
     <Box w="20%" h="100vh" background="white">
       <Box w="90%" ml="4">
-        <Box mt="4" w="95%">
+        <VStack mt="4" w="95%">
           <InputGroup>
             <InputLeftElement children={<Icon as={AiOutlineSearch} />} />
             <Input
               placeholder="Search Place"
               bg="gray.200"
-              onKeyDown={handleChange}
+              onKeyDown={handleSearch}
+              ref={searchInputRef}
             />
           </InputGroup>
-        </Box>
+          <List border="1px" borderColor="blue.400" borderRadius={4}>
+            {cityList.map((cityListItem: string) => (
+              <ListItem
+                bg="gray.300"
+                width="80"
+                textAlign="center"
+                lineHeight={2}
+                onClick={()=>handleListClick(cityListItem)}
+                cursor="pointer"
+                _hover={{
+                  bg: "gray.100"
+                }}
+              >
+                {cityListItem}
+              </ListItem>
+            ))}
+          </List>
+        </VStack>
 
         <Image src="../../assets/cloudy.svg" />
 
